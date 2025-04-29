@@ -50,7 +50,7 @@ export default function Home() {
   return (
     <div ref={mainRef}>
       <div className="flex flex-wrap justify-center md:justify-start">
-        <img src="/avatar.jpg" width={182} height={182} className="rounded-full object-cover" />
+        <img src="/avatar.jpg" width={182} className="rounded-lg object-cover" />
         <div className="ml-10">
           <h1 className="mb-0">Kai Wang</h1>
           <div>
