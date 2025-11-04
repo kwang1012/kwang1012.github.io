@@ -4,7 +4,7 @@ const news = [
   {
     title: "One paper is accepted to **CLOSER'23**",
     highlighted: false,
-    date: '02/032023',
+    date: '02/03/2023',
   },
   {
     title: 'Graduated from National Tsing Hua University!!',
@@ -25,6 +25,16 @@ const news = [
     title: 'Joined CS PhD @ **University of Illinois Urbana-Champaign**!',
     highlighted: false,
     date: '8/16/2023',
+  },
+  {
+    title: 'I am TAing for **CS425: Distributed System** for Fall 2024.',
+    highlighted: false,
+    date: '8/21/2024',
+  },
+  {
+    title: 'I am TAing for **CS341: System Programming** for Spring 2025.',
+    highlighted: false,
+    date: '1/21/2025',
   },
 ];
 export function getNews(sort?: string) {

@@ -54,7 +54,7 @@ export default function Home() {
         <div className="ml-10">
           <h1 className="mb-0">Kai Wang</h1>
           <div>
-            A second-year PhD student @ <span className="font-bold">UIUC</span>
+            A third-year PhD student @ <span className="font-bold">UIUC</span>
           </div>
           <div className="flex text-secondary my-2">
             {simpleProviders.map((provider, i) => (
@@ -83,7 +83,7 @@ export default function Home() {
       <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">About Me</div>
       <section>
         <p>
-          I am a second-year Ph.D. student at the{' '}
+          I am a third-year Ph.D. student at the{' '}
           <a className="text-blue-500 hover:underline cursor-pointer" href="https://illinois.edu/" target="_blank">
             University of Illinois at Urbana-Champaign
           </a>
@@ -116,9 +116,9 @@ export default function Home() {
         </p>
         <p>Currently, I am especially interested in and focus on:</p>
         <ul>
-          <li className="font-bold">LLM Serving</li>
-          <li>Pipeline Parallelism with Churns</li>
-          <li>GPU cluster orchestration</li>
+          <li className="font-bold">AIOps</li>
+          <li>LLM Orchestration</li>
+          <li>Smart Home</li>
         </ul>
       </section>
       <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">News</div>

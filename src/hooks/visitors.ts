@@ -11,9 +11,9 @@ export function useVisitor() {
         },
       })
       .then(({ data }) => {
-        api.post('/monitor/visitors', {
-          data,
-        });
+        // api.post('/monitor/visitors', {
+        //   data,
+        // });
       })
       .catch(console.log);
   }, []);

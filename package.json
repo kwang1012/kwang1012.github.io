@@ -1,7 +1,7 @@
 {
   "name": "v1-react",
   "version": "0.1.0",
-  "homepage": "https://kwang1012.github.io",
+  "homepage": "https://kwang.cc",
   "private": true,
   "dependencies": {
     "@dicebear/collection": "^9.2.2",

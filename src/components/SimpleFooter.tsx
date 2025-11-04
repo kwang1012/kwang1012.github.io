@@ -16,6 +16,7 @@ export default function SimpleFooter() {
       if (isMounted) setEvents(events);
     });
   }
+  const year = (new Date()).getFullYear()
 
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -71,7 +72,7 @@ export default function SimpleFooter() {
           </div>
         </Link>
       </div>
-      <span className="mt-10">Copyright © 2021-2024 Kai Wang</span>
+      <span className="mt-10">Copyright © 2021-{year} Kai Wang</span>
     </div>
   );
 }

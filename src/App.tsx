@@ -74,7 +74,7 @@ library.add(faGoogleScholarStyle);
 
 function App() {
   // useVisitor();
-  useSetting();
+  // useSetting();
   // const history = useNavigate();
 
   const dispatch = useDispatch();
@@ -108,13 +108,6 @@ function App() {
   const theme = useSelector((state: RootState) => state.theme.value);
 
   const Theme = theme === 'light' ? createTheme(lightTheme) : createTheme(darkTheme);
-
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <Home />,
-    },
-  ]);
 
   return (
     <StyledEngineProvider injectFirst>
