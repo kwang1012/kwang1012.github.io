@@ -1,19 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
-@import '~material-design-icons/iconfont/material-icons.css';
-/* @tailwind base; */
-@tailwind components;
-@tailwind utilities;
+@layer theme, base, mui, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
 
-* {
-    font-family: 'Roboto Mono', monospace;
-    letter-spacing: normal;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
-html, body {
+@theme {
+  --color-primary: #cc3363;
+  --color-card: #212223;
+  --shadow-card: 0 0 2px #ffffff70;
+  --shadow-app: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --breakpoint-xs: 28rem;
+  --breakpoint-sm: 37.5rem;
+  --breakpoint-md: 50rem;
+  --breakpoint-lg: 80rem;
+  --breakpoint-xl: 106rem;
+}
+
+* {
+  font-family: 'Roboto Mono', monospace;
+  letter-spacing: normal;
+}
+
+html,
+body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+    Helvetica Neue, sans-serif;
 }
 
 body {
@@ -32,9 +56,8 @@ body::-webkit-scrollbar-track {
 }
 /* Handle */
 body::-webkit-scrollbar-thumb {
-  /* background: #333;  */
   border-radius: 10px;
-  box-shadow: inset 0 0 10px 10px #CC3363;
+  box-shadow: inset 0 0 10px 10px #cc3363;
   border: solid 3px transparent;
 }
 
@@ -46,39 +69,4 @@ a {
 * {
   box-sizing: border-box;
   transition: background-color 0.2s;
-}
-
-.scrollbar {
-  overflow: auto;
-}
-
-.scrollbar.horz {
-  overflow-x: auto;
-  overflow-y: visible;
-}
-
-.scrollbar::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-/* Track */
-.scrollbar::-webkit-scrollbar-track {
-  display: none;
-  background-color: transparent;
-  box-shadow: inset 0 0 10px 10px transparent;
-  border: solid 3px transparent;
-}
-/* Handle */
-.scrollbar::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  box-shadow: inset 0 0 10px 10px #cc3363;
-  border: solid 3px transparent;
-  transition: box-shadow 0.2s;
-}
-
-#nprogress .bar {
-  background: #CC3363 !important;
-}
-#nprogress .peg {
-  box-shadow: 0 0 10px #CC3363DD, 0 0 5px #CC3363DD !important;
 }

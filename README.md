@@ -1,46 +1,52 @@
-# Getting Started with Create React App
+<div align="center">
+  <img alt="Logo" src="https://kwang.cc/brand.svg" height="100" />
+</div>
+<h1 align="center">
+  kwang.cc - v1
+</h1>
+<p align="center">
+  The first iteration of <a href="https://kwang.cc" target="_blank">kwang.cc</a> built with <a href="https://react.dev/" target="_blank">React</a> and hosted with <a href="https://docs.github.com/en/pages" target="_blank">Github Pages</a>
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Yes, you can fork this repo. Please give me proper credit by linking back to [kwang.cc](https://kwang.cc). Thanks!
 
-## Available Scripts
+## 🛠 Installation & Set Up
 
-In the project directory, you can run:
+1. Install dependencies
 
-### `npm start`
+   ```sh
+   yarn
+   ```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+2. Start the development server
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+   ```sh
+   yarn dev
+   ```
 
-### `npm test`
+## 🚀 Building and Running for Production
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Generate a full static production build
 
-### `npm run build`
+   ```sh
+   yarn build
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Preview the site as it will appear once deployed
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```sh
+   yarn preview
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🎨 Color Reference
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+| Color          | Hex                                                            |
+| -------------- | -------------------------------------------------------------- |
+| Primary        | ![#cc3363](https://placehold.co/12x12/cc3363/cc3363) `#cc3363` |
+| Light Navy     | ![#112240](https://placehold.co/12x12/112240/112240) `#112240` |
+| Lightest Navy  | ![#233554](https://placehold.co/12x12/233554/233554) `#233554` |
+| Slate          | ![#8892b0](https://placehold.co/12x12/8892b0/8892b0) `#8892b0` |
+| Light Slate    | ![#a8b2d1](https://placehold.co/12x12/a8b2d1/a8b2d1) `#a8b2d1` |
+| Lightest Slate | ![#ccd6f6](https://placehold.co/12x12/ccd6f6/ccd6f6) `#ccd6f6` |
+| White          | ![#e6f1ff](https://placehold.co/12x12/e6f1ff/e6f1ff) `#e6f1ff` |
+| Green          | ![#64ffda](https://placehold.co/12x12/64ffda/64ffda) `#64ffda` |

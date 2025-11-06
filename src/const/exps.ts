@@ -9,7 +9,7 @@ const rExps = [
     position: 'Graduate Research Assistant',
     startDate: '8/16/2023',
     advisor: 'Prof. Indranil Gupta',
-    projects: ['Smart Home'],
+    projects: ['AIOps', 'LLM Orchestration', 'Smart Home'],
   },
   {
     title: 'LSA Lab',
@@ -50,6 +50,14 @@ const tExps = [
     corp: 'University of Illinois Urbana-Champaign',
     place: 'Urbana, IL, USA',
     position: 'Graduate Teaching Assistant',
+    startDate: 'Spring 2025',
+    projects: ['CS341 System Programming'],
+  },
+  {
+    title: 'Computer Science Department',
+    corp: 'University of Illinois Urbana-Champaign',
+    place: 'Urbana, IL, USA',
+    position: 'Graduate Teaching Assistant',
     startDate: 'Fall 2024',
     projects: ['CS425 Distributed Systems'],
   },
@@ -61,7 +69,7 @@ const tExps = [
     startDate: 'Fall 2022',
     projects: ['CS542200 Parallel Programming'],
   },
-]
+];
 
 export function getRExps(sort?: string) {
   let _exps = rExps;
@@ -78,8 +86,18 @@ export function getTExps(sort?: string) {
   let _exps = tExps;
   if (sort) {
     const asc = sort === 'asc' ? 1 : -1;
-    _exps = _exps.sort((a, b) =>
-      moment(a.startDate, 'MM/DD/YYYY').isBefore(moment(b.startDate, 'MM/DD/YYYY')) ? -1 * asc : 1 * asc
+    _exps = _exps.sort(
+      (a, b) => {
+        const aSem = a.startDate.split(' ')[0];
+        const aYear = Number(a.startDate.split(' ')[1]);
+        const bSem = b.startDate.split(' ')[0];
+        const bYear = Number(b.startDate.split(' ')[1]);
+        if (aYear == bYear) {
+          return aSem == 'Spring' ? 1 : -1;
+        }
+        return aYear < bYear ? -1 * asc : 1 * asc;
+      }
+      // moment(a.startDate, 'MM/DD/YYYY').isBefore(moment(b.startDate, 'MM/DD/YYYY')) ? -1 * asc : 1 * asc
     );
   }
   return _exps;

@@ -7,7 +7,7 @@ export const format = (date: string | Date) => {
   else return moment(date).format('h a');
 };
 
-export function onClickProvider(provider: string, setting: any) {
+export function onClickProvider(provider: string) {
   switch (provider) {
     case 'facebook':
       window.open('https://www.facebook.com/kwang871012', '_blank');
@@ -94,6 +94,7 @@ export function normalize(data: any) {
 export async function getEvents(preview = false) {
   const today = new Date();
   return await axios
+    // this is google cloud run proxy
     .get('https://calendar-niraywahjq-uc.a.run.app', {
       params: {
         year: today.getFullYear(),

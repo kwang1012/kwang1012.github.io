@@ -1,7 +1,5 @@
-import React from 'react';
 import { Button, Card, IconButton, Popover } from '@mui/material';
 import { format } from 'src/utils';
-import GoogleMeet from 'src/assets/google-meet.png';
 import { MoreVertRounded } from '@mui/icons-material';
 import { useState } from 'react';
 
@@ -16,7 +14,7 @@ export default function AppEventCard({ event }: Props) {
     <Card className="shadow-app px-4 py-3 mt-2">
       <div className="mb-2 flex items-center">
         <div className="mr-2 h-3 w-3 rounded-sm bg-primary"></div>
-        <div className="flex-grow font-bold text-black text-sm">{event.summary}</div>
+        <div className="grow font-bold text-black text-sm">{event.summary}</div>
         <IconButton size="small" className="text-black" onClick={(e) => setAnchorEl(e.target as any)}>
           <MoreVertRounded style={{ width: 14, height: 14 }} />
         </IconButton>

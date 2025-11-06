@@ -7,15 +7,14 @@ import { IconButton, CircularProgress } from '@mui/material';
 import { useMemo } from 'react';
 import { format, getEvents } from 'src/utils';
 import AppEventCard from 'src/components/AppEventCard';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/store';
+import { useSettingStore } from 'src/store/setting';
 
 function sameDay(d1: Date, d2: Date) {
   return d1.getFullYear() === d2.getFullYear() && d1.getMonth() === d2.getMonth() && d1.getDate() === d2.getDate();
 }
 
 export function ScheduleView() {
-  const currentTheme = useSelector((state: RootState) => state.theme.value);
+  const currentTheme = useSettingStore((state) => state.theme);
   const [events, setEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const today = new Date();
@@ -99,8 +98,8 @@ export function ScheduleView() {
             <>
               {events[year][month][day].map((evt: any, i: number) => (
                 <div key={i} className="flex items-center last:mb-2">
-                  <div className="h-2 w-2 flex-shrink-0 rounded-full bg-primary" />
-                  <div className="ml-2 hidden flex-shrink-0 text-sm lg:block">
+                  <div className="h-2 w-2 shrink-0 rounded-full bg-primary" />
+                  <div className="ml-2 hidden shrink-0 text-sm lg:block">
                     {format(evt.start.dateTime || evt.start.date)}
                   </div>
                   <div className="ml-2 text-xs line-clamp-1 md:text-sm">{evt.summary}</div>

@@ -1,46 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 import 'src/styles/globals.css';
 import 'src/styles/calendar.css';
-import 'src/styles/markdown.css';
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { Provider, useDispatch, useSelector } from 'react-redux';
-import { store, persistor, RootState } from 'src/store';
 import { darkTheme, lightTheme } from 'src/styles/theme';
 import { IconDefinition, IconName, IconPrefix, library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import { PersistGate } from 'redux-persist/integration/react';
 import { createTheme } from '@mui/material/styles';
-import NProgress from 'nprogress';
-import 'nprogress/nprogress.css';
-import { onBrowserThemeChange } from 'src/store/theme';
-import { useVisitor } from 'src/hooks/visitors';
-import { useSetting } from 'src/hooks/setting';
-import {
-  createBrowserRouter,
-  Outlet,
-  Router,
-  Route,
-  RouterProvider,
-  useNavigate,
-  Routes,
-  BrowserRouter,
-} from 'react-router-dom';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import Home from './pages/home';
-import SimpleLayout from './layouts/SimpleLayout';
+import Layout from './layouts/Layout';
 import PublicationView from './pages/pubs';
 import ExperienceView from './pages/experience';
 import MiscellaneousView from './pages/miscellaneous';
 import { ScheduleView } from './pages/schedule';
-
-NProgress.configure({
-  minimum: 0.3,
-  easing: 'ease',
-  speed: 800,
-  showSpinner: false,
-});
+import { useSettingStore } from './store/setting';
+import { CssBaseline, GlobalStyles } from '@mui/material';
 
 library.add(fab);
 library.add(fas);
@@ -72,60 +47,44 @@ const faGoogleScholarStyle = {
 library.add(faCVStyle);
 library.add(faGoogleScholarStyle);
 
-function App() {
-  // useVisitor();
-  // useSetting();
-  // const history = useNavigate();
-
-  const dispatch = useDispatch();
-  React.useEffect(() => {
-    // theme
-    const darkThemeMq = window.matchMedia('(prefers-color-scheme: dark)');
-    dispatch(onBrowserThemeChange(darkThemeMq.matches));
-    darkThemeMq.addEventListener('change', (e) => {
-      dispatch(onBrowserThemeChange(e.matches));
-    });
-    // // page loading
-    // const start = () => {
-    //   NProgress.start();
-    // };
-    // const end = () => {
-    //   NProgress.done();
-    // };
-    // const unlisten = history.listen((location, action) => {
-    //   console.log("on route change");
-    // });
-    // Router.events.on('routeChangeStart', start);
-    // Router.events.on('routeChangeComplete', end);
-    // Router.events.on('routeChangeError', end);
-    // return () => {
-    //   Router.events.off('routeChangeStart', start);
-    //   Router.events.off('routeChangeComplete', end);
-    //   Router.events.off('routeChangeError', end);
-    // };
-  }, []);
-
-  const theme = useSelector((state: RootState) => state.theme.value);
-
-  const Theme = theme === 'light' ? createTheme(lightTheme) : createTheme(darkTheme);
+const Providers = ({ children }: { children: React.ReactNode }) => {
+  const theme = useSettingStore((state) => state.theme);
+  const appTheme = theme === 'light' ? createTheme(lightTheme) : createTheme(darkTheme);
 
   return (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={Theme}>
-        <CssBaseline />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<SimpleLayout />}>
-              <Route index element={<Home />} />
-              <Route path="/pubs" element={<PublicationView />} />
-              <Route path="/experiences" element={<ExperienceView />} />
-              <Route path="/miscellaneous" element={<MiscellaneousView />} />
-            </Route>
-            <Route path="/schedule" element={<ScheduleView />} />
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
+    <StyledEngineProvider enableCssLayer>
+      <GlobalStyles styles="@layer theme, base, mui, components, utilities;" />
+      <ThemeProvider theme={appTheme}>{children}</ThemeProvider>
     </StyledEngineProvider>
+  );
+};
+
+function App() {
+  const onBrowserThemeChange = useSettingStore((state) => state.onBrowserThemeChange);
+  useEffect(() => {
+    // theme
+    const darkThemeMq = window.matchMedia('(prefers-color-scheme: dark)');
+    onBrowserThemeChange(darkThemeMq.matches);
+    darkThemeMq.addEventListener('change', (e) => {
+      onBrowserThemeChange(e.matches);
+    });
+  }, []);
+
+  return (
+    <Providers>
+      <CssBaseline />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/pubs" element={<PublicationView />} />
+            <Route path="/experiences" element={<ExperienceView />} />
+            <Route path="/miscellaneous" element={<MiscellaneousView />} />
+          </Route>
+          <Route path="/schedule" element={<ScheduleView />} />
+        </Routes>
+      </BrowserRouter>
+    </Providers>
   );
 }
 

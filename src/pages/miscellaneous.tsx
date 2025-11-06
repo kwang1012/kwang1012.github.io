@@ -1,4 +1,4 @@
-import React, { ElementRef, useState } from 'react';
+import { ElementRef, useState } from 'react';
 import ContactCard from 'src/components/ContactCard';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -9,12 +9,10 @@ import { simpleProviders } from 'src/const';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef } from 'react';
 import { onClickProvider } from 'src/utils';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/store';
+import { useSettingStore } from 'src/store/setting';
 
 export default function MiscellaneousView() {
-  const setting = useSelector((state: RootState) => state.setting);
-  const themeValue = useSelector((state: RootState) => state.theme.value);
+  const theme = useSettingStore((state) => state.theme);
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -31,7 +29,7 @@ export default function MiscellaneousView() {
     <>
       <div
         className={`mt-20 pt-24 max-w-[650px] mx-auto ${
-          themeValue === 'light' ? 'bg-[#f8f9fb]' : 'dark:bg-[#131313]'
+          theme === 'light' ? 'bg-[#f8f9fb]' : 'dark:bg-[#131313]'
         } rounded-md shadow-app flex flex-col items-center relative text-center duration-400`}
       >
         <div className="absolute -top-[60px]">
@@ -44,7 +42,7 @@ export default function MiscellaneousView() {
           </div>
           <p className="text-sm px-8 pb-2 text-justify leading-[1.2] tracking-tighter">
             Hi, this is Kai Wang, an ordinary person who took several years to figure out his goal in life. Luckily, I
-            finally found it -- I want to built systems that can benefit people's daily lives. It is a challenging goal,
+            finally found it -- I want to build systems that can benefit people's daily lives. It is a challenging goal,
             but I will try until the last moment. Wish me luck! ✨
             {/* <br />
             <br />
@@ -61,7 +59,7 @@ export default function MiscellaneousView() {
                 className="cursor-pointer mr-4"
                 icon={provider}
                 size="2x"
-                onClick={() => onClickProvider(provider as string, setting)}
+                onClick={() => onClickProvider(provider as string)}
               />
             ))}
           </div>
@@ -69,6 +67,7 @@ export default function MiscellaneousView() {
             <Button
               variant="contained"
               disableElevation
+              sx={{}}
               size="small"
               className="normal-case"
               onClick={() => window.open('mailto:kw37@illinois.edu', '_blank')}
@@ -76,7 +75,14 @@ export default function MiscellaneousView() {
               Email me
             </Button>
             <div className="my-1 text-sm">or</div>
-            <Button onClick={handleClickOpen} variant="contained" disableElevation size="small" className="normal-case">
+            <Button
+              onClick={handleClickOpen}
+              sx={{}}
+              variant="contained"
+              disableElevation
+              size="small"
+              className="normal-case"
+            >
               Send message
             </Button>
           </div>

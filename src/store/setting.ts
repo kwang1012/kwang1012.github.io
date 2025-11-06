@@ -1,29 +1,46 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
-type SettingState = {
-  avatarURL: string | undefined;
-  resumeURL: string | undefined;
-};
-
-const initialState: SettingState = { avatarURL: undefined, resumeURL: undefined };
-
-export const settingSlice = createSlice({
-  name: 'local',
-  initialState,
-  reducers: {
-    setAvatar: (state, {payload}) => {
-      state.avatarURL = payload
-    },
-    setResume: (state, {payload}) => {
-      state.resumeURL = payload
-    },
-    setSetting: (state, {payload}) => {
-      state.avatarURL = payload.avatarURL
-      state.resumeURL = payload.resumeURL
+export interface SettingState {
+  theme: 'light' | 'dark';
+  modified: boolean;
+  dark: () => void; // Set theme to dark
+  light: () => void; // Set theme to light
+  onBrowserThemeChange: (isDarkMode: boolean) => void; // Handle browser theme change
+}
+export const useSettingStore = create<SettingState>()(
+  persist(
+    (set) => ({
+      theme: 'light',
+      modified: false,
+      dark: () => {
+        set(() => {
+          document.body.classList.add('dark');
+          return { theme: 'dark', modified: true };
+        });
+      },
+      light: () => {
+        set(() => {
+          document.body.classList.remove('dark');
+          return { theme: 'light', modified: true };
+        });
+      },
+      onBrowserThemeChange: (isDarkMode: boolean) =>
+        set((state: SettingState) => {
+          if (!state.modified) {
+            if (isDarkMode) {
+              document.body.classList.add('dark');
+            } else {
+              document.body.classList.remove('dark');
+            }
+            return { theme: isDarkMode ? 'dark' : 'light' };
+          }
+          return {};
+        }),
+    }),
+    {
+      name: 'setting-storage', // name of the item in the storage (must be unique)
+      storage: createJSONStorage(() => localStorage), // (optional) by default, 'localStorage' is used
     }
-  },
-});
-
-export const { setAvatar, setResume, setSetting } = settingSlice.actions;
-
-export default settingSlice.reducer;
+  )
+);

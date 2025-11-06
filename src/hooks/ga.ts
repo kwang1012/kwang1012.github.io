@@ -3,7 +3,7 @@ import ReactGA from 'react-ga';
 import { useLocation } from 'react-router-dom';
 
 function initialiseAnalytics() {
-  ReactGA.initialize(process.env.REACT_APP_ANALYTICS_ID);
+  ReactGA.initialize(import.meta.env.VITE_ANALYTICS_ID);
 }
 
 export function usePageTracking() {
