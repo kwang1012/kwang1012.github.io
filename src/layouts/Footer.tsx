@@ -1,25 +1,29 @@
-import React from 'react';
 import Calendar from 'react-calendar';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { getEvents } from 'src/utils';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/store';
+import { useSettingStore } from 'src/store/setting';
 
-export default function SimpleFooter() {
-  const currentTheme = useSelector((state: RootState) => state.theme.value);
+export default function Footer() {
+  const currentTheme = useSettingStore((state) => state.theme);
   const [events, setEvents] = useState([]);
   async function updateEvents(isMounted: boolean) {
-    getEvents(true).then((events) => {
-      if (isMounted) setEvents(events);
-    });
+    getEvents(true)
+      .then((events) => {
+        if (isMounted) setEvents(events);
+      })
+      .catch(console.log);
   }
-  const year = (new Date()).getFullYear()
+  const year = new Date().getFullYear();
 
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    if (window.location.hostname.startsWith('localhost')) {
+      console.log('Skipping ClustrMaps in local dev');
+      return;
+    }
+
     let isMounted = true;
     updateEvents(isMounted);
 
@@ -27,11 +31,15 @@ export default function SimpleFooter() {
     const script = document.createElement('script');
 
     script.src =
-      '//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=m&d=-buCz0retZ5htBaa04-Q4KlBSbCTjKPNCloS21z6WhU&co=cc3363&cmo=ff7272&cmn=78f778';
+      '//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=m&d=BzQWaJqCphqTR0pJqF-A-6AngIi1xhkwE-89GUXn7M4&co=cc3363&cmo=ff7272&cmn=78f778';
     script.id = 'clustrmaps';
 
     script.onload = () => {
       if (isMounted) setLoading(false);
+    };
+
+    script.onerror = () => {
+      console.log('failed to load map');
     };
 
     document.getElementById('map-container')?.appendChild(script);
@@ -48,9 +56,9 @@ export default function SimpleFooter() {
   return (
     <div className="text-center mt-40 flex flex-col justify-end p-5">
       <div className="flex justify-center flex-wrap gap-4">
-        <div className="flex-shrink-0 w-[300px] mb-4" id="map-container" key="unique-map"></div>
+        <div className="shrink-0 w-[300px] mb-4" id="map-container" key="unique-map"></div>
         <Link to="/schedule">
-          <div className={'flex-shrink-0 w-[300px] h-[176px] ' + currentTheme}>
+          <div className={'shrink-0 w-[300px] h-44 ' + currentTheme}>
             <Calendar
               calendarType="hebrew"
               minDetail="year"
@@ -65,7 +73,7 @@ export default function SimpleFooter() {
                 const month = date.getMonth() + 1;
                 const day = date.getDate();
                 if (!events[year] || !events[year][month] || !events[year][month][day]) return <></>;
-                return <div className="h-1 w-1 flex-shrink-0 rounded-full bg-primary mx-auto" />;
+                return <div className="h-1 w-1 shrink-0 rounded-full bg-primary mx-auto" />;
               }}
               formatDay={(_, date) => date.getDate().toString()}
             />

@@ -1,4 +1,4 @@
-import SimplePublicationCard from 'src/components/SimplePublicationCard';
+import SimplePublicationCard from 'src/components/PublicationCard';
 import { getPubs } from 'src/const/pubs';
 
 const groups = getPubs(undefined, undefined, true);

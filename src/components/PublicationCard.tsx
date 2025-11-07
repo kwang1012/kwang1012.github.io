@@ -1,60 +1,70 @@
-import { Box, useTheme, Tooltip, AppTheme } from '@mui/material';
-import gsap from 'gsap';
-import { useRef } from 'react';
-import styles from 'styles/PublicationCard.module.scss';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { useEffect } from 'react';
-
-gsap.registerPlugin(ScrollTrigger);
+import { useState } from 'react';
 
 type Props = {
   pub: any;
-  index: number;
 };
 
-export default function PublicationCard({ pub, index }: Props) {
-  const theme = useTheme<AppTheme>();
-
-  const ref = useRef();
-
-  useEffect(() => {
-    gsap.from(ref.current!, {
-      scrollTrigger: {
-        trigger: ref.current,
-        toggleActions: 'play none none none',
-      },
-      // x: '-100vw',
-      y: '50px',
-      duration: 1,
-      opacity: 0,
-      delay: (index % 2) * 0.2,
-    });
-  }, []);
-
+export default function PublicationCard({ pub, ...props }: Props) {
+  const [showing, setShowing] = useState<null | string>(null);
   return (
-    <Box
-      ref={ref}
-      className={styles.writingCard}
-      bgcolor="card.background"
-      style={{ boxShadow: theme.palette.shadow }}
-      onClick={
-        pub.url
-          ? () => {
-              window.open(pub.url, '_blank');
-            }
-          : () => {}
-      }
-    >
-      <div className={styles.wrapper}>
-        <div className={styles.tags}>
-          <span className={styles.tag}>{pub.venue.short}</span>
-          <span className={styles.tag}>{pub.authorList.find((a: any) => a.name === 'Kai-Siang Wang').type}</span>
-        </div>
-        <Tooltip title={pub.title}>
-          <div className={styles.title}>{pub.title}</div>
-        </Tooltip>
-        <div className={styles.content}>{pub.abstract}</div>
+    <div {...props} className="shadow-md mt-4 border border-solid border-gray-200 p-5 rounded-md flex flex-wrap">
+      <div className=" w-30 shrink-0 relative flex items-start flex-col">
+        <div className="bg-primary text-white p-1 rounded-md text-sm z-10 top-0">{pub.venue.short}</div>
+        {pub.image && <img src={pub.image} width="100%" className="object-contain my-auto" />}
       </div>
-    </Box>
+      <div className="ml-5 flex-1">
+        <div
+          className=" font-extrabold line-clamp-2 hover:underline"
+          onClick={() => pub.url && window.open(pub.url, '_blank')}
+        >
+          {pub.title}
+        </div>
+        <div className="my-2 line-clamp-1">
+          {pub.authorList.map((author: any, i: number) => (
+            <span key={i}>
+              <span className={author.name.includes('Kai-Siang Wang') ? 'font-bold' : ''}>
+                {author.name}
+                {author.type === 'First Author' && '*'}
+              </span>
+              {i !== pub.authorList.length - 1 && <span>, </span>}
+            </span>
+          ))}
+        </div>
+        <div className="italic line-clamp-2">{pub.venue.name}</div>
+        <div className="flex mt-3">
+          <span>
+            [
+            <a
+              className="cursor-pointer text-blue-500 hover:underline"
+              onClick={() => setShowing((value) => (value === 'abstract' ? null : 'abstract'))}
+            >
+              Abstract
+            </a>
+            ]
+          </span>
+          <span>
+            [
+            <a className="cursor-pointer text-blue-500 hover:underline" href={pub.url} rel="noreferrer" target="_blank">
+              Paper
+            </a>
+            ]
+          </span>
+          {pub.bib && (
+            <span>
+              [
+              <a
+                className="cursor-pointer text-blue-500 hover:underline"
+                onClick={() => setShowing((value) => (value === 'bib' ? null : 'bib'))}
+              >
+                Bibtex
+              </a>
+              ]
+            </span>
+          )}
+        </div>
+        {showing === 'abstract' && <div className="mt-5 whitespace-pre-wrap text-sm">{pub.abstract}</div>}
+        {showing === 'bib' && pub.bib && <div className="mt-5 whitespace-pre-wrap text-sm">{pub.bib}</div>}
+      </div>
+    </div>
   );
 }

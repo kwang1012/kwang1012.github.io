@@ -1,9 +1,7 @@
 import { Box, TextField, Button } from '@mui/material';
 import { forwardRef, useState } from 'react';
-import styles from 'src/styles/footer.module.scss';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useImperativeHandle } from 'react';
-import { api } from 'src/utils/api';
 
 type formType = {
   name?: string;
@@ -59,19 +57,19 @@ const ContactCard = forwardRef<RefType, Props>(({ inputOnly, ...props }: Props, 
     setSent(false);
     if (validate()) {
       setLoading(true);
-      return api
-        .post('messages', { data: values })
-        .then(() => {
-          setValues(initialFormValues);
-          setSent(true);
-          setErrors({});
-        })
-        .catch((err) => {
-          setError(err.message);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      // return api
+      //   .post('messages', { data: values })
+      //   .then(() => {
+      //     setValues(initialFormValues);
+      //     setSent(true);
+      //     setErrors({});
+      //   })
+      //   .catch((err) => {
+      //     setError(err.message);
+      //   })
+      //   .finally(() => {
+      //     setLoading(false);
+      //   });
     }
   }
 
@@ -125,7 +123,6 @@ const ContactCard = forwardRef<RefType, Props>(({ inputOnly, ...props }: Props, 
             size="small"
             variant="outlined"
             fullWidth
-            className={styles.input}
             name="name"
             value={values.name}
             onChange={handleInput}
@@ -145,7 +142,6 @@ const ContactCard = forwardRef<RefType, Props>(({ inputOnly, ...props }: Props, 
             size="small"
             variant="outlined"
             fullWidth
-            className={styles.input}
             name="email"
             value={values.email}
             onChange={handleInput}
@@ -213,7 +209,7 @@ const ContactCard = forwardRef<RefType, Props>(({ inputOnly, ...props }: Props, 
           >
             {inputFields}
             <Box mt={5}>
-              <Button className={styles.button} style={{ width: 200 }} variant="outlined" color="primary" type="submit">
+              <Button style={{ width: 200 }} variant="outlined" color="primary" type="submit">
                 {loading ? <CircularProgress color="primary" size={24} /> : 'Send'}
               </Button>
             </Box>
