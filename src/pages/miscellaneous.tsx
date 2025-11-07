@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Button } from '@mui/material';
-import { simpleProviders } from 'src/const';
+import { providers } from 'src/const';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef } from 'react';
 import { onClickProvider } from 'src/utils';
@@ -53,7 +53,7 @@ export default function MiscellaneousView() {
             Interests: anime, movies, baseball
           </div>
           <div className="py-3 border-0 border-gray-300 border-solid self-stretch border-t">
-            {simpleProviders.map((provider, i) => (
+            {providers.map((provider, i) => (
               <FontAwesomeIcon
                 key={i}
                 className="cursor-pointer mr-4"

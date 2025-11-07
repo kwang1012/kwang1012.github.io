@@ -1,20 +1,17 @@
-import { simpleProviders } from 'src/const';
+import { useState } from 'react';
+import { providers } from 'src/const';
 import { onClickProvider } from 'src/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import PublicationCard from 'src/components/PublicationCard';
-import moment from 'moment';
-import { useEffect, useRef, useState } from 'react';
+import dayjs from 'dayjs';
 import ReactMarkdown from 'react-markdown';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ExperienceCard from 'src/components/ExperienceCard';
 import { Link } from 'react-router-dom';
 import { getPubs } from 'src/const/pubs';
 import { getRExps } from 'src/const/exps';
 import { getNews } from 'src/const/news';
-
-gsap.registerPlugin(ScrollTrigger);
+import { motion } from 'framer-motion';
 
 const pubs = getPubs('desc', true);
 const exps = getRExps('desc');
@@ -23,28 +20,8 @@ const news = getNews('desc');
 export default function Home() {
   const [showMoreNews, setShowMoreNews] = useState(false);
 
-  const mainRef = useRef(null);
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (count == 0) {
-      setCount(1);
-      return;
-    }
-    const q = gsap.utils.selector(mainRef);
-    const sectionList = q('section');
-    sectionList.forEach((section) => {
-      gsap.from(section, {
-        ease: 'power3',
-        duration: 1.2,
-        opacity: 0,
-        y: 50,
-        scrollTrigger: section,
-      });
-    });
-  }, [mainRef, count]);
-
   return (
-    <div ref={mainRef}>
+    <div>
       <div className="flex flex-wrap justify-center md:justify-start">
         <img src="/avatar.jpg" width={182} className="rounded-lg object-cover" />
         <div className="sm:ml-10">
@@ -53,7 +30,7 @@ export default function Home() {
             A third-year PhD student @ <span className="font-bold">UIUC</span>
           </div>
           <div className="flex text-secondary my-2">
-            {simpleProviders.map((provider, i) => (
+            {providers.map((provider, i) => (
               <FontAwesomeIcon
                 key={i}
                 className="cursor-pointer mr-4"
@@ -77,7 +54,12 @@ export default function Home() {
         </div>
       </div>
       <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">About Me</div>
-      <section>
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
+        viewport={{ once: true }}
+      >
         <p>
           I am a third-year Ph.D. student at the{' '}
           <a className="text-blue-500! hover:underline! cursor-pointer" href="https://illinois.edu/" target="_blank">
@@ -120,9 +102,14 @@ export default function Home() {
           <li>LLM Orchestration</li>
           <li>Smart Home</li>
         </ul>
-      </section>
+      </motion.section>
       <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">News</div>
-      <section>
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
+        viewport={{ once: true }}
+      >
         <ul className="pl-6">
           {news.slice(0, 2).map((n, i: number) => (
             <ReactMarkdown
@@ -131,7 +118,7 @@ export default function Home() {
                 p: ({ className, children }) => <li className={className + ' mb-2'}>{children}</li>,
               }}
             >
-              {`[**${moment(n.date, 'MM/DD/YYYY').format('MMM YYYY')}**] ${n.title} ${n.highlighted ? '⭐️' : ''}`}
+              {`[**${dayjs(n.date, 'MM/DD/YYYY').format('MMM YYYY')}**] ${n.title} ${n.highlighted ? '⭐️' : ''}`}
             </ReactMarkdown>
           ))}
           {showMoreNews &&
@@ -142,7 +129,7 @@ export default function Home() {
                   p: ({ className, children }) => <li className={className + ' mb-2'}>{children}</li>,
                 }}
               >
-                {`[**${moment(n.date, 'MM/DD/YYYY').format('MMM YYYY')}**] ${n.title}`}
+                {`[**${dayjs(n.date, 'MM/DD/YYYY').format('MMM YYYY')}**] ${n.title}`}
               </ReactMarkdown>
             ))}
         </ul>
@@ -154,11 +141,16 @@ export default function Home() {
             {showMoreNews ? 'view less' : 'view more'}
           </span>
         )}
-      </section>
+      </motion.section>
       <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">
         Selected Publictions
       </div>
-      <section>
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
+        viewport={{ once: true }}
+      >
         {pubs.map((pub, i) => (
           <PublicationCard key={i} pub={pub} />
         ))}
@@ -168,15 +160,20 @@ export default function Home() {
             <span className="ml-2">Full list</span>
           </div>
         </Link>
-      </section>
+      </motion.section>
       <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">
         Research Experiences
       </div>
-      <section>
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
+        viewport={{ once: true }}
+      >
         {exps.map((exp, i) => (
           <ExperienceCard key={i} exp={exp} sm />
         ))}
-      </section>
+      </motion.section>
     </div>
   );
 }

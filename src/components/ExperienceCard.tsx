@@ -1,5 +1,4 @@
-import React from 'react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 const isSemester = (date: string) => date.includes('Fall') || date.includes('Spring');
 
@@ -32,12 +31,8 @@ export default function ExperienceCard({
       </div>
       <div className={[sm ? 'text-sm' : 'mt-2'].join(' ')}>
         {exp.position}.{' '}
-        {isSemester(exp.startDate) ? exp.startDate : moment(exp.startDate, 'MM/DD/YYYY').format('MMM YYYY') + ' - '}
-        {isSemester(exp.startDate)
-          ? ''
-          : exp.endDate
-          ? moment(exp.endDate, 'MM/DD/YYYY').format('MMM YYYY')
-          : 'Present'}
+        {isSemester(exp.startDate) ? exp.startDate : dayjs(exp.startDate, 'MM/DD/YYYY').format('MMM YYYY') + ' - '}
+        {isSemester(exp.startDate) ? '' : exp.endDate ? dayjs(exp.endDate, 'MM/DD/YYYY').format('MMM YYYY') : 'Present'}
       </div>
       {exp.advisor && <div className={[sm ? 'text-sm' : 'mt-2'].join(' ')}>Advisor: {exp.advisor}</div>}
       {!sm && exp.projects?.length && (

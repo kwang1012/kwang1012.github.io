@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 const news = [
   {
@@ -42,7 +42,7 @@ export function getNews(sort?: string) {
   if (sort) {
     const asc = sort === 'asc' ? 1 : -1;
     _news = _news.sort((a, b) =>
-      moment(a.date, 'MM/DD/YYYY').isBefore(moment(b.date, 'MM/DD/YYYY')) ? -1 * asc : 1 * asc
+      dayjs(a.date, 'MM/DD/YYYY').isBefore(dayjs(b.date, 'MM/DD/YYYY')) ? -1 * asc : 1 * asc
     );
   }
   return _news;

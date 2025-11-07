@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 const rExps = [
   {
@@ -76,7 +76,7 @@ export function getRExps(sort?: string) {
   if (sort) {
     const asc = sort === 'asc' ? 1 : -1;
     _exps = _exps.sort((a, b) =>
-      moment(a.startDate, 'MM/DD/YYYY').isBefore(moment(b.startDate, 'MM/DD/YYYY')) ? -1 * asc : 1 * asc
+      dayjs(a.startDate, 'MM/DD/YYYY').isBefore(dayjs(b.startDate, 'MM/DD/YYYY')) ? -1 * asc : 1 * asc
     );
   }
   return _exps;
@@ -86,19 +86,15 @@ export function getTExps(sort?: string) {
   let _exps = tExps;
   if (sort) {
     const asc = sort === 'asc' ? 1 : -1;
-    _exps = _exps.sort(
-      (a, b) => {
-        const aSem = a.startDate.split(' ')[0];
-        const aYear = Number(a.startDate.split(' ')[1]);
-        const bSem = b.startDate.split(' ')[0];
-        const bYear = Number(b.startDate.split(' ')[1]);
-        if (aYear == bYear) {
-          return aSem == 'Spring' ? 1 : -1;
-        }
-        return aYear < bYear ? -1 * asc : 1 * asc;
+    _exps = _exps.sort((a, b) => {
+      const aSem = a.startDate.split(' ')[0];
+      const aYear = Number(a.startDate.split(' ')[1]);
+      const bYear = Number(b.startDate.split(' ')[1]);
+      if (aYear == bYear) {
+        return aSem == 'Spring' ? 1 : -1;
       }
-      // moment(a.startDate, 'MM/DD/YYYY').isBefore(moment(b.startDate, 'MM/DD/YYYY')) ? -1 * asc : 1 * asc
-    );
+      return aYear < bYear ? -1 * asc : 1 * asc;
+    });
   }
   return _exps;
 }

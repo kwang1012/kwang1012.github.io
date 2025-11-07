@@ -1,6 +1,6 @@
 import Calendar from 'react-calendar';
 import { useEffect, useState } from 'react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import { getEvents } from 'src/utils';
 import { useSettingStore } from 'src/store/setting';
@@ -67,7 +67,7 @@ export default function Footer() {
                 return date.getMonth() !== activeStartDate.getMonth() ? 'disabled' : '';
               }}
               tileDisabled={({ date, activeStartDate }) => date.getMonth() !== activeStartDate.getMonth()}
-              formatShortWeekday={(_, date) => moment(date).format('dd')[0]}
+              formatShortWeekday={(_, date) => dayjs(date).format('dd')[0]}
               tileContent={({ date }) => {
                 const year = date.getFullYear();
                 const month = date.getMonth() + 1;

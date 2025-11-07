@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { Close } from '@mui/icons-material';
 import { IconButton, CircularProgress } from '@mui/material';
 import { useMemo } from 'react';
 import { format, getEvents } from 'src/utils';
-import AppEventCard from 'src/components/AppEventCard';
+import EventCard from 'src/components/EventCard';
 import { useSettingStore } from 'src/store/setting';
 
 function sameDay(d1: Date, d2: Date) {
@@ -49,15 +49,15 @@ export function ScheduleView() {
         <div className="p-4 pt-0 w-[300px]">
           <h1 className="text-black text-xl m-0">Today's Events</h1>
           {todayEvents && todayEvents.length !== 0 ? (
-            todayEvents.map((evt: any, i: number) => <AppEventCard key={i} event={evt} />)
+            todayEvents.map((evt: any, i: number) => <EventCard key={i} event={evt} />)
           ) : (
             <div className=" text-gray-400 text-center my-3">none</div>
           )}
           {selectedDate && !sameDay(selectedDate, today) && (
             <>
-              <h1 className="text-black text-xl m-0 mt-5">{moment(selectedDate).format('yyyy-MM-DD')} Events</h1>
+              <h1 className="text-black text-xl m-0 mt-5">{dayjs(selectedDate).format('yyyy-MM-DD')} Events</h1>
               {selectedEvents && selectedEvents.length !== 0 ? (
-                selectedEvents.map((evt: any, i: number) => <AppEventCard key={i} event={evt} />)
+                selectedEvents.map((evt: any, i: number) => <EventCard key={i} event={evt} />)
               ) : (
                 <div className=" text-gray-400 text-center my-3">none</div>
               )}

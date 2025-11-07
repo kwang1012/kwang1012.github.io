@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 const pubs = [
   {
@@ -22,7 +22,7 @@ const pubs = [
     url: 'https://link.springer.com/chapter/10.1007/978-3-031-29927-8_12',
     abstract:
       'Many embedded systems have hard resource constraints that make schedules found by list scheduling heuristics invalid. In this paper, we show the problems caused by memory constraints and deadlocks during the scheduling process. We propose new extensions for list scheduling algorithms and make them take memory constraints into account. The experiment shows that our methods can solve deadlocks effectively and reduce total memory usage drastically compared to original scheduling heuristics.',
-    image: '/reservation.webp',
+    image: '/images/reservation.webp',
     slides: 'https://lsalab.cs.nthu.edu.tw/home/publication/PDCAT22_slides.pptx',
     bib: `@InProceedings{10.1007/978-3-031-29927-8_12,
 author="Wang, Kai-Siang
@@ -33,7 +33,7 @@ and Hanawa, Toshihiro
 and Hyuk Park, Jong
 and Tian, Hui
 and Egawa, Ryusuke",
-title="A Reservation-Based List Scheduling for Embedded Systems with Memory Constraints",
+title="A Reservation-Based List Scheduling for Embedded Systems with Memory Constraints",
 booktitle="Parallel and Distributed Computing, Applications and Technologies",
 year="2023",
 publisher="Springer Nature Switzerland",
@@ -72,7 +72,7 @@ isbn="978-3-031-29927-8"
     url: 'https://www.sciencedirect.com/science/article/pii/S0743731522001289',
     abstract:
       'Hadoop is a popular computing framework designed to deliver timely and cost-effective data processing on a large cluster of commodity machines. It relieves the burden of the programmers dealing with distributed programming, and an ecosystem of Big Data solutions has developed around it. However, Hadoop’s job execution time can greatly depend on its runtime configurations and resource selections. Given the more than 100 job configuration settings provided by Hadoop, and diverse resource instance options in a cloud or virtualized computing environment, running Hadoop jobs still requires a substantial amount of expertise and experience. To address this challenge, we apply a deep neural network to predict Hadoop’s job time based on historical execution data, and propose optimization methods to reduce job execution time and cost. The results show that our prediction method achieves almost 90% time prediction accuracy and clearly outperforms three other state-of-the-art regression-based prediction methods. Based on the time prediction, our proposed configuration search method and job scheduling algorithm successfully shorten the execution time of a single Hadoop job by more than a factor of 2 and reduce the time of processing a batch of Hadoop jobs by 40% ~65%.',
-    image: '/hadoop.webp',
+    image: '/images/hadoop.webp',
     bib: `@article{CHEN202245,
 title = {ALBERT: An automatic learning based execution and resource management system for optimizing Hadoop workload in clouds},
 journal = {Journal of Parallel and Distributed Computing},
@@ -110,7 +110,7 @@ author = {Chen-Chun Chen and Kai-Siang Wang and Yu-Tung Hsiao and Jerry Chou},
     url: 'https://www.scitepress.org/PublicationsDetail.aspx?ID=Ajk01eQ6KJU=&t=1',
     abstract:
       'Spot-instances(SI) is an auction-based pricing scheme used by cloud providers. It allows users to place bids for spare computing instances and rent them at a substantially lower price compared to the fixed on-demand price. This inexpensive computational power is at the cost of availability, because a spot instance can be revoked whenever the spot market price exceeds the bid. Therefore, SI has become an attractive option for applications without requiring real-time availability constraints, such as the batch jobs in different application domains, including big data analytics, scientific computing, and deep learning. For batch jobs, service interruptions and execution delays can be tolerated as long as their service quality is gauged by an execution deadline. Hence, this paper aims to develop a static bidding strategy for minimizing the monetary cost of a batch job with hard deadline constraints. We formulate the problem as a Markov chain process and use Dynamic Programming to find the optimal bid in polynomial time. Experiments conducted on real workloads from Amazon Spot Instance historical prices show that our proposed strategy successfully outperformed two state-of-art dynamic bidding strategies~(Amazing, DBA), and several deadline agnostic static bidding strategies with lower cost and fault tolerance overhead.',
-    image: '/bidding.webp',
+    image: '/images/bidding.webp',
     bib: `@conference{closer23,
 author={Kai-Siang Wang. and Cheng-Han Hsieh. and Jerry Chou.},
 title={Optimal Static Bidding Strategy for Running Jobs with Hard Deadline Constraints on Spot Instances},
@@ -151,7 +151,7 @@ export function getPubs(sort?: string, selected?: boolean, group?: boolean) {
   if (sort) {
     const asc = sort === 'asc' ? 1 : -1;
     _pubs = _pubs.sort((a, b) =>
-      moment(a.date, 'MM/DD/YYYY').isBefore(moment(b.date, 'MM/DD/YYYY')) ? -1 * asc : 1 * asc
+      dayjs(a.date, 'MM/DD/YYYY').isBefore(dayjs(b.date, 'MM/DD/YYYY')) ? -1 * asc : 1 * asc
     );
   }
   return _pubs;
