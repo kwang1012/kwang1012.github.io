@@ -18,7 +18,8 @@
     "jsx": "react-jsx",
     "paths": {
       "src/*": ["./src/*"],
-      "public/*": ["./public/*"]
+      "public/*": ["./public/*"],
+      "data/*": ["./data/*"]
     },
     "types": ["vite/client"]
   },

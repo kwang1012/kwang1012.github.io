@@ -35,7 +35,7 @@ export default function PublicationCard({ pub, ...props }: Props) {
           <span>
             [
             <a
-              className="cursor-pointer text-blue-500 hover:underline"
+              className="cursor-pointer text-blue-500! hover:underline!"
               onClick={() => setShowing((value) => (value === 'abstract' ? null : 'abstract'))}
             >
               Abstract
@@ -44,7 +44,7 @@ export default function PublicationCard({ pub, ...props }: Props) {
           </span>
           <span>
             [
-            <a className="cursor-pointer text-blue-500 hover:underline" href={pub.url} rel="noreferrer" target="_blank">
+            <a className="cursor-pointer text-blue-500! hover:underline!" href={pub.url} rel="noreferrer" target="_blank">
               Paper
             </a>
             ]
@@ -53,7 +53,7 @@ export default function PublicationCard({ pub, ...props }: Props) {
             <span>
               [
               <a
-                className="cursor-pointer text-blue-500 hover:underline"
+                className="cursor-pointer text-blue-500! hover:underline!"
                 onClick={() => setShowing((value) => (value === 'bib' ? null : 'bib'))}
               >
                 Bibtex

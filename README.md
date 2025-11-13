@@ -32,11 +32,36 @@ Yes, you can fork this repo. Please give me proper credit by linking back to [kw
    yarn build
    ```
 
-1. Preview the site as it will appear once deployed
+2. Preview the site as it will appear once deployed
 
    ```sh
    yarn preview
    ```
+
+3. Deploy with Github Pages
+
+   ```sh
+   yarn deploy
+   ```
+
+## ⚙️ Configure with your own data!
+
+### File structure
+
+#### static
+
+- `public/avatar.jpg`: Your avatar shown in the main page
+- `public/brand.svg`: Your logo shown in the navbar
+- `public/CV.pdf`: Your cv
+- `public/favicon.ico`: Your custom favicon
+- `public/CNAME`: Your custom domain name
+- `public/images/*`: Your images used in other places
+
+#### data
+
+- `data/main.yaml`: Basic information, News, ...
+- `data/experiences.yaml`: Research/Teaching experiences
+- `data/publications.yaml`: Publications
 
 ## 🎨 Color Reference
 

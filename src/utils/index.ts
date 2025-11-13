@@ -7,34 +7,6 @@ export const format = (date: string | Date) => {
   else return dayjs(date).format('h a');
 };
 
-export function onClickProvider(provider: string) {
-  switch (provider) {
-    case 'facebook':
-      window.open('https://www.facebook.com/kwang871012', '_blank');
-      break;
-    case 'instagram':
-      window.open('https://www.instagram.com/kwang871012', '_blank');
-      break;
-    case 'x-twitter':
-      window.open('https://twitter.com/kwang871012', '_blank');
-      break;
-    case 'google-scholar':
-      window.open('https://scholar.google.com/citations?hl=en&user=h_G1PyIAAAAJ', '_blank');
-      break;
-    case 'linkedin':
-      window.open('https://www.linkedin.com/in/kai-wang-1b57b51a8/', '_blank');
-      break;
-    default: {
-      if (provider.includes('cv')) window.open('/CV.pdf', '_blank');
-      else if (provider.includes('google-scholar'))
-        window.open('https://scholar.google.com/citations?hl=en&user=h_G1PyIAAAAJ', '_blank');
-      else if (provider.includes('github')) window.open('https://github.com/kwang1012', '_blank');
-      else if (provider.includes('x-twitter')) window.open('https://twitter.com/kwang871012', '_blank');
-      else if (provider.includes('linkedin')) window.open('https://www.linkedin.com/in/kai-wang-1b57b51a8/', '_blank');
-    }
-  }
-}
-
 export async function getEvents(preview = false) {
   const today = new Date();
   return await axios

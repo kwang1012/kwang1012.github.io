@@ -1,0 +1,49 @@
+name: Kai Wang
+description: A 3rd-year PhD student @ **UIUC**
+email: kw37@illinois.edu
+location: |
+  Room #3111, Thomas M. Siebel Center
+  201 N. Goodwin Avenue, Urbana, IL, 61801, USA
+providers:
+  - type: cv
+    link: /CV.pdf
+  - type: google-scholar
+    link: https://scholar.google.com/citations?hl=en&user=h_G1PyIAAAAJ
+  - type: github
+    link: https://github.com/kwang1012
+  - type: x
+    link: https://twitter.com/kwang871012
+  - type: linkedin
+    link: https://www.linkedin.com/in/kai-wang-1b57b51a8/
+about: |
+  I am a third-year Ph.D. student at the [University of Illinois at Urbana-Champaign](https://illinois.edu/), working with Prof. [Indy Gupta](https://indy.cs.illinois.edu/) as a member of the [Distributed Protocols Research Group (DPRG)](https://dprg.cs.uiuc.edu/).
+
+  Before starting my Ph.D., I received my Bachelor's and Master's degrees from [National Tsing Hua University](https://nthu-en.site.nthu.edu.tw/), Taiwan.
+
+  My research interest covers topics around AIOps, ML Systems, Internet of Things, and Cloud Computing.
+
+  Currently, I am especially interested in and focus on:
+  - **AIOps**
+  - LLM Orchestration
+  - Smart Home
+news:
+  - title: One paper is accepted to **CLOSER'23**
+    # highlighted: false/true
+    date: 02/03/2023
+  - title: 'Graduated from National Tsing Hua University!!'
+    date: '01/18/2023'
+  - title: 'New Paper accepted at **PDCAT 2022**!'
+    date: '10/23/2022'
+  - title: "Attend the conference, **PDCAT'22** (Sendai, Japan)"
+    date: '12/7/2022'
+  - title: 'Joined CS PhD @ **University of Illinois Urbana-Champaign**!'
+    date: '8/16/2023'
+  - title: 'I am TAing for **CS425: Distributed System** for Fall 2024.'
+    date: '8/21/2024'
+  - title: 'I am TAing for **CS341: System Programming** for Spring 2025.'
+    date: '1/21/2025'
+miscellaneous:
+  name: Kai-Siang Wang (Kai)
+  description: I am a slow walker, but I never walk backwards.
+  detail: Hi, this is Kai Wang, an ordinary person who took several years to figure out his goal in life. Luckily, I finally found it -- I want to build systems that can benefit people's daily lives. It is a challenging goal, but I will try until the last moment. Wish me luck! ✨
+  interests: anime, movies, baseball

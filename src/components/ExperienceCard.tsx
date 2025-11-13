@@ -15,12 +15,7 @@ export default function ExperienceCard({
     >
       <div className={sm ? '' : 'text-lg'}>
         {exp.link ? (
-          <a
-            className="font-bold text-blue-500 hover:underline cursor-pointer"
-            href={exp.link}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a className="font-bold text-blue-500! hover:underline!" href={exp.link} target="_blank" rel="noreferrer">
             {exp.title}
           </a>
         ) : (

@@ -1,19 +1,20 @@
-import { ElementRef, useState } from 'react';
+import { ComponentRef, useState } from 'react';
 import ContactCard from 'src/components/ContactCard';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Button } from '@mui/material';
-import { providers } from 'src/const';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef } from 'react';
-import { onClickProvider } from 'src/utils';
 import { useSettingStore } from 'src/store/setting';
+import { useData, useProviders } from 'src/utils/data-loader';
 
 export default function MiscellaneousView() {
   const theme = useSettingStore((state) => state.theme);
   const [open, setOpen] = useState(false);
+  const providers = useProviders();
+  const data = useData();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -23,7 +24,7 @@ export default function MiscellaneousView() {
     setOpen(false);
   };
 
-  const card = useRef<ElementRef<typeof ContactCard>>(null);
+  const card = useRef<ComponentRef<typeof ContactCard>>(null);
 
   return (
     <>
@@ -36,30 +37,20 @@ export default function MiscellaneousView() {
           <img src="/avatar.jpg" width={150} height={150} className="rounded-full object-cover" />
         </div>
         <div className="flex flex-col items-center self-stretch">
-          <h2 className="mb-0">Kai-Siang Wang (Kai)</h2>
-          <div className="text-gray-400 text-sm mt-2 tracking-tighter">
-            I am a slow walker, but I never walk backwards.
-          </div>
-          <p className="text-sm px-8 pb-2 text-justify leading-[1.2] tracking-tighter">
-            Hi, this is Kai Wang, an ordinary person who took several years to figure out his goal in life. Luckily, I
-            finally found it -- I want to build systems that can benefit people's daily lives. It is a challenging goal,
-            but I will try until the last moment. Wish me luck! ✨
-            {/* <br />
-            <br />
-            This site will serve as a personal blog as I will record my life here. Stay tuned if you are interested, and
-            I would be grateful if you give me any advice! 😊 */}
-          </p>
+          <h2 className="mb-0">{data.miscellaneous.name}</h2>
+          <div className="text-gray-400 text-sm mt-2 tracking-tighter">{data.miscellaneous.description}</div>
+          <p className="text-sm px-8 pb-2 text-justify leading-[1.2] tracking-tighter">{data.miscellaneous.detail}</p>
           <div className="text-sm tracking-tighter py-3 border-0 border-gray-300 border-solid self-stretch border-t">
-            Interests: anime, movies, baseball
+            Interests: {data.miscellaneous.interests}
           </div>
           <div className="py-3 border-0 border-gray-300 border-solid self-stretch border-t">
             {providers.map((provider, i) => (
               <FontAwesomeIcon
                 key={i}
                 className="cursor-pointer mr-4"
-                icon={provider}
+                icon={provider.icon}
                 size="2x"
-                onClick={() => onClickProvider(provider as string)}
+                onClick={() => window.open(provider.link, '_blank')}
               />
             ))}
           </div>
@@ -70,7 +61,7 @@ export default function MiscellaneousView() {
               sx={{}}
               size="small"
               className="normal-case"
-              onClick={() => window.open('mailto:kw37@illinois.edu', '_blank')}
+              onClick={() => window.open(`mailto:${data.email}`, '_blank')}
             >
               Email me
             </Button>
