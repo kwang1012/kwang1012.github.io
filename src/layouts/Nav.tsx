@@ -61,9 +61,9 @@ export default function Nav() {
         url: '/experiences',
       },
       {
-        text: 'Miscellaneous',
-        onClick: () => navigate('/miscellaneous'),
-        url: '/miscellaneous',
+        text: 'Contact Me',
+        onClick: () => navigate('/contact'),
+        url: '/contact',
       },
     ];
   }, [loaded]);

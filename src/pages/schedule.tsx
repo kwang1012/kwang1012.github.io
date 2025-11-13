@@ -7,14 +7,12 @@ import { IconButton, CircularProgress } from '@mui/material';
 import { useMemo } from 'react';
 import { format, getEvents } from 'src/utils';
 import EventCard from 'src/components/EventCard';
-import { useSettingStore } from 'src/store/setting';
 
 function sameDay(d1: Date, d2: Date) {
   return d1.getFullYear() === d2.getFullYear() && d1.getMonth() === d2.getMonth() && d1.getDate() === d2.getDate();
 }
 
 export function ScheduleView() {
-  const currentTheme = useSettingStore((state) => state.theme);
   const [events, setEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const today = new Date();
@@ -47,7 +45,7 @@ export function ScheduleView() {
           </IconButton>
         </div>
         <div className="p-4 pt-0 w-[300px]">
-          <h1 className="text-black text-xl m-0">Today's Events</h1>
+          <h1 className="text-black dark:text-white text-xl m-0">Today's Events</h1>
           {todayEvents && todayEvents.length !== 0 ? (
             todayEvents.map((evt: any, i: number) => <EventCard key={i} event={evt} />)
           ) : (
@@ -55,7 +53,7 @@ export function ScheduleView() {
           )}
           {selectedDate && !sameDay(selectedDate, today) && (
             <>
-              <h1 className="text-black text-xl m-0 mt-5">{dayjs(selectedDate).format('yyyy-MM-DD')} Events</h1>
+              <h1 className="text-black dark:text-white text-xl m-0 mt-5">{dayjs(selectedDate).format('yyyy-MM-DD')} Events</h1>
               {selectedEvents && selectedEvents.length !== 0 ? (
                 selectedEvents.map((evt: any, i: number) => <EventCard key={i} event={evt} />)
               ) : (
@@ -71,7 +69,7 @@ export function ScheduleView() {
         calendarType="hebrew"
         onClickDay={setSelectedDate}
         minDetail="year"
-        className={'full ' + currentTheme}
+        className="full"
         navigationLabel={({ label }) => (
           <div className="flex items-center justify-center">
             <div>{label}</div>

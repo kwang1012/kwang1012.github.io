@@ -9,6 +9,9 @@
 .react-calendar.full {
   height: 100vh;
 }
+.dark .react-calendar .react-calendar__navigation button {
+  color: white;
+}
 .react-calendar.hide-navigation .react-calendar__navigation {
   display: none;
 }
@@ -55,12 +58,14 @@
 .react-calendar__navigation button:disabled {
   background-color: #f0f0f0;
 }
+.dark .react-calendar__navigation button:disabled {
+  background-color: black;
+}
 .react-calendar__navigation button:enabled:hover,
 .react-calendar__navigation button:enabled:focus {
   background-color: #e6e6e6;
 }
-.dark 
-.react-calendar__navigation button:enabled:hover,
+.dark .react-calendar__navigation button:enabled:hover,
 .react-calendar__navigation button:enabled:focus {
   background-color: #262626;
 }

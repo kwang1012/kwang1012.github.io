@@ -79,7 +79,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/pubs" element={<PublicationView />} />
             <Route path="/experiences" element={<ExperienceView />} />
-            <Route path="/miscellaneous" element={<MiscellaneousView />} />
+            <Route path="/contact" element={<MiscellaneousView />} />
           </Route>
           <Route path="/schedule" element={<ScheduleView />} />
         </Routes>

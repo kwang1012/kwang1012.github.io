@@ -3,10 +3,8 @@ import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import { getEvents } from 'src/utils';
-import { useSettingStore } from 'src/store/setting';
 
 export default function Footer() {
-  const currentTheme = useSettingStore((state) => state.theme);
   const [events, setEvents] = useState([]);
   async function updateEvents(isMounted: boolean) {
     getEvents(true)
@@ -58,7 +56,7 @@ export default function Footer() {
       <div className="flex justify-center flex-wrap gap-4">
         <div className="shrink-0 w-[300px] mb-4" id="map-container" key="unique-map"></div>
         <Link to="/schedule">
-          <div className={'shrink-0 w-[300px] h-44 ' + currentTheme}>
+          <div className="shrink-0 w-[300px] h-44">
             <Calendar
               calendarType="hebrew"
               minDetail="year"
